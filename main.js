@@ -8,11 +8,12 @@ class Juego {
     constructor(){
         this.inicializar()
         this.generarFrecuencia()
+        this.siguienteNivel()
     }
 
     inicializar(){
         btnEmpezar.classList.add('hide')
-        this.nivel = 1
+        this.nivel = 7
         this.colores = {
             celeste,
             violeta,
@@ -23,6 +24,39 @@ class Juego {
 
     generarFrecuencia(){
         this.secuencia = new Array(10).fill(0).map(n => Math.floor(Math.random()* 4))
+    }
+
+    siguienteNivel(){
+        this.iluminarSecuencia()
+    }
+
+    transformarNumeroAColor(numero){
+        switch (numero){
+            case 0:
+                return 'celeste'
+            case 1:
+                return 'violeta'
+            case 2:
+                return 'naranja'
+            case 3:
+                return 'verde'
+        }
+    }
+
+    iluminarSecuencia(){
+        for(let i = 0; i < this.nivel; i++){
+            const color = this.transformarNumeroAColor(this.secuencia[i])
+            setTimeout(() => this.iluminarColot(color), 1000 * i)
+        }
+    }
+
+    iluminarColot(color){
+        this.colores[color].classList.add('light')
+        setTimeout(() => this.apagarColor(color), 350)
+    }
+
+    apagarColor(color){
+        this.colores[color].classList.remove('light')
     }
 }
 
