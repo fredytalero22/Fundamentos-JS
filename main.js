@@ -27,11 +27,7 @@ class Juego {
     }
 
     toogleBtnEmpezar(){
-        if(btnEmpezar.classList.contains('hide')){
-            btnEmpezar.classList.remove('hide')
-        }else{
-            btnEmpezar.classList.add('hide')
-        }
+        btnEmpezar.classList.toggle('hide')
     }
 
     generarFrecuencia(){
@@ -113,7 +109,10 @@ class Juego {
                 if(this.nivel === (ULTIMO_NIVEL + 1)){
                     this.ganoElJuego()
                 }else{
-                    setTimeout(this.siguienteNivel, 1500)
+                    swal('Platzi', `Nivel ${this.nivel}`, 'success')
+                    .then(() => {
+                        setTimeout(this.siguienteNivel, 1500)  
+                    })
                 }
             }
         }else{
